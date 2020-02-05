@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<script>
+			const socket = new WebSocket('ws://localhost:1576');
+			socket.addEventListener("open", () => {
+				console.log("socket successfully opened");
+				document.getElementById("send").onclick = () => {
+					const element = document.getElementById("content");
+					const data = element.value;
+					if(data != "") socket.send(data);
+					element.value = "";
+					console.log("message sent");
+				};
+			});
+			socket.addEventListener("message", (mes) => {
+				console.log(mes);
+				if(mes.data == "") return;
+				const messages = JSON.parse(mes.data);
+				const container = document.getElementById("history");
+				messages.forEach((message) => {
+					const child = document.createElement("p");
+					child.className = "message";
+					child.innerText = message;
+					container.appendChild(child);
+				});
+			});
+		</script>
+	</head>
+	<body>
+		<div id="history"/>
+		<div>
+			<input id="send" type="button" value="send">
+			<input id="content"/>
+		</div>
+	</body>
+
+</html>
