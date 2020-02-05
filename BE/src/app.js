@@ -6,15 +6,15 @@ const wsserver = new (require("websocket")).server({
 let messages = [];
 const connections = {};
 const sendMessageToAllClients = (message) => {
-	console.log(connections);
-	for(const ip in connections){
-		console.log(message);
-		connections[ip].send(JSON.stringify([message]));
+	for(const id in connections){
+		console.log(id);
+		connections[id].send(JSON.stringify([message]));
 	}
 };
 wsserver.on("request", (req) => {
 	const connection = req.accept(null, req.origin);
-	connections[connection.remoteAddress + " " + (new Date()).getTime()] = connection;
+	const id = connection.remoteAddress + " " + (new Date()).getTime();
+	connections[id] = connection;
 	connection.send(JSON.stringify(messages));
 	connection.on("message", (mes) => {
 		if(mes.type == "utf8"){
@@ -22,5 +22,8 @@ wsserver.on("request", (req) => {
 			messages.push(mes.utf8Data);
 			sendMessageToAllClients(mes.utf8Data);
 		}
+	});
+	connection.on("close", (reasonCode, description) => {
+		delete connections[id];
 	});
 });
