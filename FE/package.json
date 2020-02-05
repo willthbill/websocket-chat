@@ -2,5 +2,11 @@
   "name": "FE",
   "version": "1.0.0",
   "main": "index.js",
-  "license": "MIT"
+  "license": "MIT",
+  "dependencies": {
+    "http-server": "^0.12.1"
+  },
+  "scripts" : {
+   "start" : "http-server src -p 8080"
+  }
 }

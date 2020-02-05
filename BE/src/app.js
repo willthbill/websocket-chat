@@ -1,13 +1,15 @@
-const server = require("http").createServer(() => {});
-server.listen(1576, () => console.log("lisiting..."));
+const server = require("http").createServer((req, res) => {
+	req.setHeader('Access-Control-Allow-Headers', req.header.origin);
+});
+server.listen(1576, "0.0.0.0", () => console.log("lisiting..."));
 const wsserver = new (require("websocket")).server({
-	httpServer : server
+	httpServer : server,
+	//autoAcceptConnections : true
 });
 let messages = [];
 const connections = {};
 const sendMessageToAllClients = (message) => {
 	for(const id in connections){
-		console.log(id);
 		connections[id].send(JSON.stringify([message]));
 	}
 };
