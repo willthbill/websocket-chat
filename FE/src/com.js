@@ -1,4 +1,7 @@
-const socket = new WebSocket('ws://192.168.0.29:1576');
+
+const ip = "192.168.0.29";
+
+const socket = new WebSocket(`ws://${ip}:157`);
 
 const alias = (() => {
     if(localStorage.getItem("alias")){

@@ -1,0 +1,4 @@
+(cd BE
+yarn start) &
+(cd FE
+yarn start)
