@@ -2,6 +2,8 @@
 
 ## Installation
 Install yarn.
+Clone this repository: `git clone https://github.com/williamMBDK/websocket-chat.git`
+Navigate to the root folder of the repository.
 Run command from root folder: `cd BE && yarn install`
 Run command from root folder: `cd FE && yarn install`
 
