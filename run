@@ -1,4 +1,4 @@
 (cd BE
-yarn start) &
+npm run start) &
 (cd FE
-yarn start)
+npm run start)
