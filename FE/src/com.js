@@ -1,4 +1,4 @@
-const ip = "localhost";
+const ip = "139.162.143.213";
 
 const socket = new WebSocket(`ws://${ip}:1576`);
 
